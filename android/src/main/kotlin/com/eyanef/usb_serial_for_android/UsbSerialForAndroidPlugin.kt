@@ -178,7 +178,7 @@ class UsbSerialForAndroidPlugin : FlutterPlugin, MethodCallHandler, EventChannel
             }
         } catch (e: java.lang.Exception) {
             Log.e(TAG, e.stackTraceToString())
-            result.error(TAG, "Failed to acquire USB device", null)
+            result.error(TAG, e.toString(), null)
         }
     }
 
