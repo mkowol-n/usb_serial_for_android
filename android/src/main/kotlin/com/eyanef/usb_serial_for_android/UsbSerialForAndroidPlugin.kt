@@ -19,6 +19,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import kotlin.concurrent.thread
 
 /** UsbSerialForAndroidPlugin */
 class UsbSerialForAndroidPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler {
@@ -94,8 +95,12 @@ class UsbSerialForAndroidPlugin : FlutterPlugin, MethodCallHandler, EventChannel
         val permissionIntent = PendingIntent.getBroadcast(cw, 0, Intent(ACTION_USB_PERMISSION),
             PendingIntent.FLAG_IMMUTABLE)
         val filter = IntentFilter(ACTION_USB_PERMISSION)
-        cw?.registerReceiver(usbReceiver, filter)
         _usbManager?.requestPermission(device, permissionIntent)
+
+        thread {
+            Thread.sleep(4000)
+            cw?.registerReceiver(usbReceiver, filter)
+        }
     }
 
     private fun openDevice(
