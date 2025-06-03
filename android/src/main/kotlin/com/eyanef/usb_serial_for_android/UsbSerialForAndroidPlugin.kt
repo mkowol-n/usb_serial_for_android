@@ -92,7 +92,8 @@ class UsbSerialForAndroidPlugin : FlutterPlugin, MethodCallHandler, EventChannel
 
         val cw = _context
         val usbReceiver = BCR2(device, cb)
-        val permissionIntent = PendingIntent.getBroadcast(cw, 0, Intent(ACTION_USB_PERMISSION), 0)
+        val permissionIntent = PendingIntent.getBroadcast(cw, 0, Intent(ACTION_USB_PERMISSION),
+            PendingIntent.FLAG_IMMUTABLE)
         val filter = IntentFilter(ACTION_USB_PERMISSION)
         cw?.registerReceiver(usbReceiver, filter)
         _usbManager?.requestPermission(device, permissionIntent)
