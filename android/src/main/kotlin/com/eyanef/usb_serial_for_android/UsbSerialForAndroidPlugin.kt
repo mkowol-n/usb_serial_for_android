@@ -77,7 +77,8 @@ class UsbSerialForAndroidPlugin : FlutterPlugin, MethodCallHandler, EventChannel
                     _context?.unregisterReceiver(this)
                     synchronized(this) {
                         Log.i(TAG, "BCR2 in sync")
-                        if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
+                        //TODO
+                        if (!intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                             _cb.onSuccess(_device)
                         } else {
                             Log.e(TAG, "Permission denied for device")
@@ -87,7 +88,6 @@ class UsbSerialForAndroidPlugin : FlutterPlugin, MethodCallHandler, EventChannel
 
                 }
             }
-
         }
 
         val cw = _context
