@@ -97,10 +97,10 @@ class UsbSerialForAndroidPlugin : FlutterPlugin, MethodCallHandler, EventChannel
         val filter = IntentFilter(ACTION_USB_PERMISSION)
         _usbManager?.requestPermission(device, permissionIntent)
 
-        thread {
+        Thread({
             Thread.sleep(4000)
             cw?.registerReceiver(usbReceiver, filter)
-        }
+        }).start()
     }
 
     private fun openDevice(
