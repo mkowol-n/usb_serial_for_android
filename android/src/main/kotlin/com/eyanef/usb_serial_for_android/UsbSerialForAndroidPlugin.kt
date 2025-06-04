@@ -176,7 +176,8 @@ class UsbSerialForAndroidPlugin : FlutterPlugin, MethodCallHandler, EventChannel
                 acquirePermission(device, cb)
                 return
             } else {
-                result.error(TAG, "Failed to acquire USB permission", null)
+                //TODO
+                //result.error(TAG, "Failed to acquire USB permission", null)
             }
         } catch (e: java.lang.Exception) {
             Log.e(TAG, e.stackTraceToString())
